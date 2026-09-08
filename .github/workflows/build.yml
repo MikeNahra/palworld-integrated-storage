@@ -3,24 +3,25 @@ name: Build Mod DLL
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout Repository
+    - name: Checkout repository
       uses: actions/checkout@v4
       with:
         submodules: recursive
 
-    - name: Setup MSBuild
+    - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v2
 
-    - name: Build C++ Solution
+    - name: Build solution
       run: msbuild /p:Configuration=Release /p:Platform=x64
 
-    - name: Upload Artifact
+    - name: Upload DLL Artifact
       uses: actions/upload-artifact@v4
       with:
         name: ModIntegratedStorageCpp
