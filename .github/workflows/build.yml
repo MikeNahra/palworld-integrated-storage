@@ -17,12 +17,11 @@ jobs:
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v2
 
-    - name: Run MSBuild
+    - name: Build C++ Solution
       run: msbuild /p:Configuration=Release /p:Platform=x64
 
-    - name: Upload Compiled DLL
+    - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
         name: ModIntegratedStorageCpp
-        path: |
-          **/*.dll
+        path: "**/*.dll"
